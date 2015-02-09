@@ -1,0 +1,216 @@
+
+
+<font face="Arial" size="5">
+<B> < "Select Specific Columns from a relation" > </B> <br>
+
+
+<font face="Arial" size="3">
+13. You will select specific columns from relation B.<br>
+SO, define a new relation C, which contain only the symbol, date and 
+close fields,	<br><br>
+
+
+<table style="border: 0.28pt solid rgb(0, 0, 0); border-collapse: collapse;">
+<tbody><tr>
+<td style="border: 0.28pt solid rgb(0, 0, 0); padding: 1.41pt 5.1pt; background: rgb(242, 242, 242) none repeat scroll 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; width: 600pt; height: 20pt;" valign="top">
+
+
+STOCK_A = LOAD 'NYSE_daily_prices_A.csv' using PigStorage(',') 
+AS (exchange:chararray, symbol:chararray, date:chararray, open:float, high:float, low:float, close:float, volume:int, adj_close:float); <br>
+B = LIMIT STOCK_A 100; <br>
+C = FOREACH B GENERATE symbol, date, close; <br>
+DESCRIBE C; <br><br>
+
+</td>
+</tr></tbody></table><br>
+
+Result :  <p><img width="663" height="124" title="21.PNG" align="" class="__se_object" id="se_object_142343714485658117" style="width: 663px; height: 124px; rwidth: 663px; rheight: 124px;" src="http://blogfiles.naver.net/20150209_284/blue91822_1423437101592kUA8S_PNG/21.PNG" rwidth="663" rheight="124" jsonvalue="%7B%7D" imgqe="true" s_subtype="photo" s_type="attachment"><br></p> <br><br>
+
+<font face="Arial" size="5">
+<B> < "Store relationship data into a HDFS File" > </B> <br>
+
+
+
+<font face="Arial" size="3">
+14.You will use the STORE command. <br>
+STORE command outputs a relation into a new file in HDFS. <br>
+And, this requires a MapReduce job.<br><br>
+
+
+<table style="border: 0.28pt solid rgb(0, 0, 0); border-collapse: collapse;">
+<tbody><tr>
+<td style="border: 0.28pt solid rgb(0, 0, 0); padding: 1.41pt 5.1pt; background: rgb(242, 242, 242) none repeat scroll 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; width: 600pt; height: 20pt;" valign="top">
+
+STORE C INTO 'output/C'; <br><br>
+</td>
+</tr></tbody></table><br>
+
+<img width="663" height="124" title="21.PNG" align="" class="__se_object" id="se_object_142343714485658117" style="width: 663px; height: 124px; rwidth: 663px; rheight: 124px;" src="http://blogfiles.naver.net/20150209_284/blue91822_1423437101592kUA8S_PNG/21.PNG" rwidth="663" rheight="124" jsonvalue="%7B%7D" imgqe="true" s_subtype="photo" s_type="attachment">&nbsp;</p>
+
+
+
+
+<br>
+
+<p><img width="740" height="331" title="20.PNG" align="" class="__se_object" id="se_object_142343726296277792" style="width: 740px; height: 331px; rwidth: 740px; rheight: 331px;" src="http://blogfiles.naver.net/20150209_166/blue91822_14234372196095rSm0_PNG/20.PNG" rwidth="740" rheight="331" jsonvalue="%7B%7D" imgqe="true" s_subtype="photo" s_type="attachment"></p>
+
+<br>
+You can find a folder named "output" in File Browser. <br>
+
+
+
+Click on "output" folder. There is a "C" subfolder.<br>
+Click on "C" folder, you will find an output file called"part-r-00000"<Br>
+
+Result :   <p><img width="740" height="251" title="25.PNG" align="" class="__se_object" id="se_object_142343734707498593" style="width: 740px; height: 251px; rwidth: 740px; rheight: 251px;" src="http://blogfiles.naver.net/20150209_53/blue91822_1423437303800uRnod_PNG/25.PNG" rwidth="740" rheight="251" jsonvalue="%7B%7D" imgqe="true" s_subtype="photo" s_type="attachment"></p><p><br></p> <br><br>
+
+
+If you click on the file "part-r-00000", you can check result.<br><Br>
+
+
+
+<font face="Arial" size="5">
+<B>  < "Perform a join between 2 relations" > </B> <br><br>
+
+
+
+<font face="Arial" size="3">
+"JOIN" combined the records from multiple tables within a database as a column.<br>
+JOIN is a means for combininbg the fields by using each of the common value in the two 
+tables. <br><br><br><br><br>
+
+
+
+In this step, you will perform a join on two NYSE data sets : the daily prices
+and the dividend prices. <br>
+DIvidends prices shows for the quarter ad stock prices show on a daily basis.<Br>
+
+
+Result : <p><img width="740" height="256" title="26.PNG" align="" class="__se_object" id="se_object_142343836742456273" style="width: 740px; height: 256px; rwidth: 740px; rheight: 256px;" src="http://blogfiles.naver.net/20150209_56/blue91822_1423438324193gaj95_PNG/26.PNG" jsonvalue="%7B%7D" imgqe="true" rwidth="740" rheight="256" s_subtype="photo" s_type="attachment"></p><p><br></p><p><br></p><br><Br>
+
+<p><img width="499" height="463" title="27.PNG" align="" class="__se_object" id="se_object_142343839807842725" style="width: 499px; height: 463px; rwidth: 499px; rheight: 463px;" src="http://blogfiles.naver.net/20150209_149/blue91822_1423438354865JKDTl_PNG/27.PNG" jsonvalue="%7B%7D" imgqe="true" rwidth="499" rheight="463" s_subtype="photo" s_type="attachment"></p><p><br></p><p><br></p>
+<br><Br>
+
+
+15. 
+
+<table style="border: 0.28pt solid rgb(0, 0, 0); border-collapse: collapse;">
+<tbody><tr>
+<td style="border: 0.28pt solid rgb(0, 0, 0); padding: 1.41pt 5.1pt; background: rgb(242, 242, 242) none repeat scroll 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; width: 600pt; height: 20pt;" valign="top">
+
+
+
+STOCK_A = LOAD 'NYSE_daily_prices_A.csv' using PigStorage(',') <br>
+AS (exchange:chararray, symbol:chararray, date:chararray, open:float, high:float, low:float, close:float, volume:int, adj_close:float); <br> 
+DIV_A = LOAD 'NYSE_dividends_A.csv' using PigStorage(',') AS (exchange:chararray, symbol:chararray, date:chararray, dividend:float); <Br>
+C = JOIN STOCK_A BY (symbol, date), DIV_A BY (symbol, date); <Br>
+DESCRIBE C;  <Br><Br><Br>
+
+</td>
+</tr></tbody></table><br>
+
+
+
+STOCK_A : a relation for the stocks <br>
+DIV_A : the dividends for stocks that start with an "A" <Br>
+You will define the new relation C.<Br>
+C : join A and B by both the symbol and date.<br>
+
+And use "DUMP" command to see the data stored in the relation C.<Br>
+
+<Br><Br>
+
+<font face="Arial" size="5">
+<B> < "Sort the data using “ORDER BY"”> </B><br><br>
+
+
+
+<font face="Arial" size="3">
+"OREDER BY" command sort the column or columns and is specified in the syntax
+of the end.<br><br>
+
+16. <Br><Br>
+
+
+<table style="border: 0.28pt solid rgb(0, 0, 0); border-collapse: collapse;">
+<tbody><tr>
+<td style="border: 0.28pt solid rgb(0, 0, 0); padding: 1.41pt 5.1pt; background: rgb(242, 242, 242) none repeat scroll 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; width: 600pt; height: 20pt;" valign="top">
+
+DIV_A = LOAD 'NYSE_dividends_A.csv' using PigStorage(',') <br>
+AS (exchange:chararray, symbol:chararray, date:chararray, dividend:float); <Br>
+B = ORDER DIV_A BY symbol, date asc; <br>
+DUMP B; <br>
+
+
+</td>
+</tr></tbody></table><br>
+
+
+
+You will sort the dividends by symbol then date in ascending order.<br>
+
+ You can check the sorted data.<br><br>
+
+Result : <p><img width="740" height="67" title="오더바이_이거로.PNG" align="" class="__se_object" id="se_object_14234374104477759" style="width: 740px; height: 67px; rwidth: 740px; rheight: 67px;" src="http://blogfiles.naver.net/20150209_130/blue91822_1423437367200hl538_PNG/%BF%C0%B4%F5%B9%D9%C0%CC_%C0%CC%B0%C5%B7%CE.PNG" rwidth="740" rheight="67" jsonvalue="%7B%7D" imgqe="true" s_subtype="photo" s_type="attachment"></p><p><br></p><p><br></p> <br><Br><br><br>
+<br>
+
+<p><img width="521" height="534" title="오더_바이_결과.PNG" align="" class="__se_object" id="se_object_14234374703989770" style="width: 521px; height: 534px; rwidth: 521px; rheight: 534px;" src="http://blogfiles.naver.net/20150209_122/blue91822_1423437427131TFNxX_PNG/%BF%C0%B4%F5_%B9%D9%C0%CC_%B0%E1%B0%FA.PNG" rwidth="521" rheight="534" jsonvalue="%7B%7D" imgqe="true" s_subtype="photo" s_type="attachment"></p><p><br></p><p><br></p>
+
+
+
+<font face="Arial" size="5">
+<B>  < "Filter and Group the data using “GROUP BY"”> </B> <br>
+
+
+
+<font face="Arial" size="3">
+You will group the DIV_A relation by the dividend price for the "AZZ" stock. <br>
+
+17. <br>
+
+
+
+
+<table style="border: 0.28pt solid rgb(0, 0, 0); border-collapse: collapse;">
+<tbody><tr>
+<td style="border: 0.28pt solid rgb(0, 0, 0); padding: 1.41pt 5.1pt; background: rgb(242, 242, 242) none repeat scroll 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial; width: 600pt; height: 20pt;" valign="top">
+
+
+DIV_A = LOAD 'NYSE_dividends_A.csv' using PigStorage(',')<br>
+AS (exchange:chararray, symbol:chararray, date:chararray, dividend:float);<Br>
+B = FILTER DIV_A BY symbol=='AZZ';<Br>
+C = GROUP B BY dividend; <Br>
+DESCRIBE C; DUMP C; <br>
+
+
+</td>
+</tr></tbody></table><br>
+
+
+You can find the data for stock symbol "AZZ" is grouped together for
+each dividend.
+
+
+<br><br>
+
+Result : 
+
+<p><img width="740" height="138" title="28.PNG" align="" class="__se_object" id="se_object_142343808230620364" style="width: 740px; height: 138px; rwidth: 740px; rheight: 138px;" src="http://blogfiles.naver.net/20150209_16/blue91822_1423438039035VW653_PNG/28.PNG" rwidth="740" rheight="138" jsonvalue="%7B%7D" imgqe="true" s_subtype="photo" s_type="attachment"></p><p><br></p><p><br></p><br><Br>
+
+
+<p><img width="740" height="464" title="29.PNG" align="" class="__se_object" id="se_object_142343814106429560" style="width: 740px; height: 464px; rwidth: 740px; rheight: 464px;" src="http://blogfiles.naver.net/20150209_221/blue91822_1423438097809dMHcH_PNG/29.PNG" rwidth="740" rheight="464" jsonvalue="%7B%7D" imgqe="true" s_subtype="photo" s_type="attachment"></p><p><br></p><p><br></p>
+ <br><Br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</font></font></body></html>
